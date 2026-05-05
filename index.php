@@ -9,9 +9,9 @@ if (isset($_POST['aggiungi_iscritto'])) {
 }
 
 if (isset($_GET['visualizzacorso'])) {
-    $id = $_GET['visualizzacorso'];
+    $id_corso = $_GET['visualizzacorso'];
 
-    $conn->query("SELECT iscrizioni_corsi HAVING count($id_membro>5");
+    $conn->query("SELECT iscrizioni_corsi WHERE max($id_membro) HAVING count($id_membro>5");
 }
 ?>
 
@@ -26,10 +26,9 @@ if (isset($_GET['visualizzacorso'])) {
 <form method="POST">
     id_membro: <input type="text" name="membro" required>
 
-    id_corso:
-    <select name="corso">
+    id_corso:  <select name="corso">
         <?php
-        $id_membro = $conn->query("SELECT * FROM membri");
+        $id_membro = $conn->query("SELECT * FROM corsi");
         while ($a = $membri->fetch_assoc()) {
             echo "<option value='{$a['id']}'>{$a['id_membro']}</option>";
         }
@@ -38,6 +37,30 @@ if (isset($_GET['visualizzacorso'])) {
 
     <button name="aggiungi_iscritto">Aggiungi</button>
 </form>
+
+<h2>visualizza corso con più iscritti (>5)</h2>
+<form method="GET">
+    Corso:
+    <select name="visualizzacorso">
+        <?php
+        $id_corso = $conn->query("SELECT iscrizioni_corsi WHERE max($id_membro) HAVING count($id_membro>5");
+        ?>
+    </select>
+    <button>Visualizza</button>
+</form>  
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
