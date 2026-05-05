@@ -1,0 +1,1 @@
+# seghezzi_verifica_info
