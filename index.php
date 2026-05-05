@@ -48,9 +48,9 @@ if (isset($_GET['visualizzacorso'])) {
     </select>
     <button>Visualizza</button>
 </form>  
-
 </body>
 </html>
+
 
 
 
